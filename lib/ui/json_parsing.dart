@@ -33,7 +33,8 @@ class _JsonParsingSimpleState extends State<JsonParsingSimple> {
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot)
             {
             if(snapshot.hasData){
-              return Text(snapshot.data[0]['title']);
+              return createListView(context, snapshot.data);
+              //return Text(snapshot.data[0]['title']);
             }
             return CircularProgressIndicator();
           },
@@ -58,6 +59,34 @@ class _JsonParsingSimpleState extends State<JsonParsingSimple> {
 
 
     return data;
+  }
+
+  Widget createListView(BuildContext context, List data) {
+    return Container(
+      child: ListView.builder(
+        itemCount: data.length,
+          itemBuilder: (context,int index){
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Divider(height:5.0,thickness: 5.0,color: Colors.blue,),
+            ListTile(
+              title: Text("${data[index]['title']}"),
+              subtitle: Text("${data[index]['body']}"),
+              leading: Column(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.black26,
+                    radius: 25.0,
+                    child: Text("${data[index]["id"]}"),
+                  )
+                ],
+              ),
+            )
+          ],
+        );
+      }),
+    );
   }
 }
 
