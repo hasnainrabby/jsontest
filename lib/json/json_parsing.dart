@@ -56,8 +56,6 @@ class _JsonParsingSimpleState extends State<JsonParsingSimple> {
     //   print(value);
     // });
 
-
-
     return data;
   }
 
